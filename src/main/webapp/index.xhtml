@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+ 
+	<h:head>
+	
+		<title>Innolex - Calculadora de Plazos</title>
+		<link href="style.css" type="text/css" rel="stylesheet"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			PrimeFaces.locales['es'] = {
+			                closeText: 'Cerrar',
+			                prevText: 'Anterior',
+			                nextText: 'Siguiente',
+			                currentText: 'Inicio',
+			                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			                monthNamesShort: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+			                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+			                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			                dayNamesMin: ['D','L','M','X','J','V','S'],
+			                weekHeader: 'Semana',
+			                firstDay: 1,
+			                isRTL: false,
+			                showMonthAfterYear: false,
+			                yearSuffix: '',
+			                timeOnlyTitle: 'Sólo hora',
+			                timeText: 'Tempo',
+			                hourText: 'Hora',
+			                minuteText: 'Minuto',
+			                secondText: 'Segundo',
+			                currentText: 'Fecha actual',
+			                ampm: false,
+			                month: 'Mes',
+			                week: 'Semana',
+			                day: 'Día',
+			                allDayText : 'Todo el día'
+			            };
+		</script>
+	
+	</h:head>
+	
+	<h:body>
+		
+	    <p:panel id="header" position="north" size="100">
+	        <h:graphicImage style="width: 30%" value="images/innolex.png" />
+			<div id="function">
+				<h:outputText value="Calculadora de Plazos" styleClass="apptitle"/>
+			</div>
+			<p:panel id="others">
+				<h:graphicImage styleClass="grayscale" value="images/facebook.png" />
+				<h:graphicImage styleClass="grayscale" value="images/google.png" />
+				<h:graphicImage styleClass="grayscale" value="images/twitter.png" />
+				<h:graphicImage styleClass="grayscale" value="images/linkedin.png" />
+			</p:panel>
+	    </p:panel>
+	
+	    <p:panel id="content" position="center">
+	        <h:form>
+	        
+	            <p:panel id="panel_calendar" styleClass="calendar" columns="3" cellpadding="5">
+	           
+	           		<p:calendar id="cal" value="#{calendarBean.selectedDate}" locale="es" startWeekday="1" 
+	           					styleClass="cal" mode="inline" pages="4" widgetVar="testCalendar" pagedate="#{calendarBean.currentSelectedDate}"/>
+	           					
+	           		<script type="text/javascript">
+	           		
+		                 $(document).ready(function(){
+		                    testCalendar.jqEl.datepicker("option","beforeShowDay",checkDate);
+		                 });
+				
+				         function checkDate(date){
+					         
+					         	
+					         var weekday=date.getDay();
+					         var day = date.getDate();
+					         var month = date.getMonth()+1;//January is 0!
+					         var year = date.getFullYear();
+					         					         
+					         if(day &#60; 10){
+					        	 day = "0"+day;					        	 
+					         }
+					         if(month &#60; 10){
+					        	 month = "0"+month;					        	 
+					         }
+					         var stringDate = day+"/"+month+"/"+year;
+					        
+					         //Check saturday and sunday
+					         var result = ''; 
+					         if(weekday==0 || weekday==6){
+					        	 result='weekend';
+					         }
+					         
+					         //Check holidays
+					         var hol = #{calendarBean.holidays};
+					         var holyArray = hol.split(', ');					         					         
+					         
+					         for(var i=0; i&#60;holyArray.length; i++){
+					        	 var splitArray = holyArray[i].split('-');
+						         if(splitArray[0] == stringDate){
+						        	 result = splitArray[1];
+						         }
+					         }
+					         
+					         
+					         
+					         return [true, result];
+					         
+				            }
+				            
+			        </script>
+					
+					<p:panel styleClass="legend">
+						<h:outputText value="Leyenda:" styleClass="title_i"/>
+						<div style="margin-right:10px; margin-left: 30px; display:inline-block; background-color:#9ed5f7; width:10px; height:10px;"></div>
+						<h:outputText value="Fiesta Nacional"/>
+						<div style="margin-right:10px; margin-left: 30px; display:inline-block; background-color:#bae5ff; width:10px; height:10px;"></div>
+						<h:outputText value="Fiesta Autonómica"/>
+						<div style="margin-right:10px; margin-left: 30px; display:inline-block; background-color:#ddf0ff; width:10px; height:10px;"></div>
+						<h:outputText value="Fiesta Local"/>
+					</p:panel>
+	           		
+	            </p:panel> 
+				
+				<p:panel styleClass="select_days2" cellpadding="5">
+					<p:panel styleClass="title2" style="width:300px;">
+						<h:outputText value="Plazo Otorgado" styleClass="title_i"/>
+					</p:panel>
+					<p:panel styleClass="title2" style="width:200px;">
+						<h:outputText value="Buscar" styleClass="title_i"/>
+					</p:panel>
+				</p:panel>
+	           
+	            <p:panel styleClass="select_days" cellpadding="5"> 
+						 
+					<p:spinner id="spinnerBasic" styleClass="input_s" min="0" value="#{calendarBean.days}"/>
+			   
+					<p:selectOneMenu id="type" value="#{calendarBean.type}" styleClass="select_type" disabled="#{calendarBean.disabled}">  
+						<f:selectItems value="#{calendarBean.types}" />    
+					</p:selectOneMenu>
+					
+					<p:watermark for="search" value="Buscar un partido judicial" />
+					<p:autoComplete id="search" styleClass="input_a" value="#{calendarBean.search}" minQueryLength="2" 
+								effect="fade" completeMethod="#{calendarBean.completeLocalidad}">	
+						<p:ajax update="ccaa,cities,suburbs" event="blur" onblur="updateSelect()" 
+								listener="#{calendarBean.handleSearchChange}" />
+						<p:ajax update="panel_calendar" event="change" process="panel_calendar"/>
+					</p:autoComplete>
+				         
+					<script type="text/javascript">
+			
+						 function updateSelect(){
+							 
+							 ccaaW.selectValue(#{calendarBean.ca}); 
+							 
+							 citiesW.selectValue(#{calendarBean.city}); 
+							 
+							 suburbsW.selectValue(#{calendarBean.suburb});
+							 
+							}
+						
+					</script>
+			  
+			    </p:panel> 
+		       
+		        <p:panel styleClass="select_cities" header="Partidos Judiciales">  
+		       
+			        <h:panelGrid id="select_menu" columns="1" cellpadding="5"> 
+			         	
+			         	<p:message for="ccaa" display="text" />
+			            <p:selectOneMenu id="ccaa" widgetVar="ccaaW" styleClass="select" value="#{calendarBean.ca}" required="true" requiredMessage="Debe elegir una Comunidad Autónoma">  
+			                <f:selectItem itemLabel="Seleccione la Comunidad Autónoma" itemValue="#{null}" />  
+			                <f:selectItems value="#{calendarBean.ccaaStringL}" />  
+			                <p:ajax update="cities,suburbs" event="change" process="ccaa"
+			                        listener="#{calendarBean.handleCCAAChange}" /> 
+							<f:validateRequired/>			            
+						</p:selectOneMenu>
+			  
+			  			<p:message for="cities" display="text" />
+			            <p:selectOneMenu id="cities" widgetVar="citiesW" styleClass="select" value="#{calendarBean.city}" required="true" requiredMessage="Debe elegir una Provincia">   
+			                <f:selectItem itemLabel="Selecccione la provincia" itemValue="#{null}" />  
+			                <f:selectItems value="#{calendarBean.citiesStringL}" />  
+			                <p:ajax update="suburbs" event="change" process="cities"
+			                        listener="#{calendarBean.handleCityChange}" />
+			                <f:validateRequired/>			            
+			            </p:selectOneMenu>
+			            
+			            
+			            <p:message for="suburbs" display="text" />
+			            <p:selectOneMenu id="suburbs" widgetVar="suburbsW" styleClass="select" value="#{calendarBean.suburb}" required="true" requiredMessage="Debe elegir un Municipio">   
+			                <f:selectItem itemLabel="Selecccione el municipio" itemValue="#{null}" />  
+			                <f:selectItems value="#{calendarBean.suburbsStringL}" />
+			                <p:ajax update="panel_calendar" event="change" process="suburbs, panel_calendar"
+			                        listener="#{calendarBean.handleGetHolidays}" />
+			                <f:validateRequired/>
+			            </p:selectOneMenu>  
+			              
+			        </h:panelGrid> 
+				
+				</p:panel>
+			  
+<!-- 			<p:panel id="panel_map" styleClass="map">
+			  
+			  		<p:gmap center="#{calendarBean.centered}" zoom="9" type="ROADMAP" style="width:250px;height:250px"  model="#{calendarBean.simpleModel}"/>
+			  
+			    </p:panel> 
+-->
+			  
+			    <p:panel id="select_opt" styleClass="select_options" header="Opciones">
+		       			       
+			        <p:panel styleClass="options" columns="1" cellpadding="5">  
+				  
+				  		<p:message for="options" display="text" />
+				        <p:selectOneRadio id="options" value="#{calendarBean.option1}" layout="pageDirection" required="true" requiredMessage="Elija una opción">  
+				            <f:selectItem itemLabel="Plazo Procesal" itemValue="1" />  
+				            <f:selectItem itemLabel="Plazo Administrativo" itemValue="2" />
+				            <p:ajax update="options2" event="change" process="options"
+			                        listener="#{calendarBean.handleTypeOfProcedure}" />    
+				        </p:selectOneRadio>  
+				  
+				    </p:panel>
+				   
+				    <p:panel  styleClass="options" columns="1" cellpadding="5">  
+				  
+				  		<p:message for="options2" display="text" />
+				        <p:selectOneRadio id="options2" value="#{calendarBean.option2}" layout="pageDirection" required="true" requiredMessage="Elija una opción">  
+				            <f:selectItem itemLabel="Fecha a fecha" itemValue="1" />  
+				            <f:selectItem itemLabel="Naturales" itemValue="3" />
+				            <f:selectItem itemLabel="Hábiles" itemValue="2" />
+				            <f:selectItem itemLabel="Hábiles + Agosto" itemValue="4" itemDisabled="#{calendarBean.itemDisabled}"/> 
+				            <p:ajax update="type" event="change" process="options2"
+			                        listener="#{calendarBean.handleTypeOfDate}" />   
+				        </p:selectOneRadio>  
+				  
+				    </p:panel>
+			   
+			    </p:panel>
+				
+				<p:panel id="panel_inst" styleClass="instr" header="Instrucciones">
+				
+					<h:panelGrid styleClass="instrucciones" columns="2" cellpadding="5">
+						<h:outputText value="1." styleClass="step" />
+						<h:outputText value="Seleccione la fecha de notificación en el calendario superior."/>
+						
+						<h:outputText value="2." styleClass="step"/>
+						<h:outputText value="Utilice las opciones para indicar el tipo de plazo."/>
+						
+						<h:outputText value="3." styleClass="step"/>
+						<h:outputText value="Introduzca el plazo en el campo habilitado para ello."/>
+						
+						<h:outputText value="4." styleClass="step"/>
+						<h:outputText value="Si desea buscar un partido judicial, utilice el buscador. En caso contrario, para buscar por provincias utilice el menú de la izquierda."/>			  
+					
+					</h:panelGrid>
+					
+					<p:commandButton styleClass="button" value="Calcular" update="display,select_menu,select_opt" oncomplete="handleLoginRequest(xhr, status, args)" 
+							actionListener="#{calendarBean.calculateCalendar}"/>
+				 
+					<script type="text/javascript">  
+						function handleLoginRequest(xhr, status, args) {  
+							if(!args.validationFailed) {  
+								dialog.show();  
+							} 
+						}  
+					</script>					
+					
+			    </p:panel> 
+			   
+			    <p:dialog styleClass="dialog" header="Plazos" widgetVar="dialog"   
+		            showEffect="fade" hideEffect="fade">  
+		      
+					<h:panelGrid id="display" columns="2" cellpadding="5">  
+					  
+						<h:outputText value="Fecha de inicio del plazo:" />  
+						<h:outputText value="#{calendarBean.selectedDate}" id="inlineDate">  
+							<f:convertDateTime pattern="EEE, dd/MM/yyyy" timeZone="Europe/Madrid" />  
+						</h:outputText>
+						
+						<h:outputText value="Fecha de fin de plazo:" />  
+						<h:outputText value="#{calendarBean.finalDate}" id="outlineDate">  
+							<f:convertDateTime pattern="EEE, dd/MM/yyyy" timeZone="Europe/Madrid" />  
+						</h:outputText>
+						  
+					</h:panelGrid>  
+          
+    			</p:dialog>
+    			
+    			<p:dialog styleClass="dialog" header="Formulario de Contacto" widgetVar="dialog2"   
+		            showEffect="fade" hideEffect="fade">  
+		      
+					<h:panelGrid columns="2" cellpadding="5">  
+					  
+						<p:watermark for="name" value="Introduzca su nombre" />
+						<p:inputText id="name" value="#{contactBean.name}" style="width:300px;"/>
+						<p:watermark for="email" value="Introduzca su email" />
+						<p:inputText id="email" value="#{contactBean.email}" style="width:300px;"/> 
+						<p:watermark for="problem" value="Explíquenos el motivo de su problema" /> 
+						<p:inputTextarea id="problem" value="#{contactBean.reason}" style="width:300px;"/>
+						  
+					</h:panelGrid>  
+          
+    			</p:dialog> 
+	
+	        </h:form>
+	    </p:panel>
+		
+		<p:panel id="bottom" position="south">
+			<p:panel id="panel1">
+				<h:graphicImage value="images/mini_logo.png"/>
+				<h:outputText value="Legal Innovation, S.L." styleClass="disclaimer"/>
+				<h:outputText value="Copyright © 2013. All rights reserved" styleClass="disclaimer"/>
+			</p:panel>
+			
+			<p:panel id="panel3">
+				<h:outputText value="Nuestro Blog" styleClass="title"/>
+				<h:outputText value="Pulse aquí para acceder a nuestro blog donde encontrará los próximos proyectos y actualizaciones." styleClass="disclaimer"/>
+				<h:outputText value="---------------------------------------" styleClass="disclaimer"/>
+				<h:outputText value="Condiciones de Uso | Licencias" styleClass="disclaimer"/>
+			</p:panel>
+			
+			<p:panel id="panel2">
+				<h:outputText value="¿Ha encontrado algún error?" styleClass="title"/>
+				<h:outputText styleClass="disclaimer" value="Haga click más abajo y rellene el siguiente formulario, cuéntenos su problema o error que ha encontrado e intentaremos resolverlo lo antes posible."/>
+				<p:commandButton style="margin-left:15px; width: 80%;"  value="Contacte con nosotros" oncomplete="dialog2.show()" />
+			</p:panel>
+		
+	    </p:panel>
+	
+	</h:body>
+</html>

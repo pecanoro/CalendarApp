@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	
+	<persistence-unit name="calendar" transaction-type="RESOURCE_LOCAL">
+		<!-- OpenJPA persistence provider -->
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+
+		<!-- JPA entities must be registered here -->
+		<class>model.ComunidadAutonoma</class>
+		<class>model.Provincia</class>
+		<class>model.Localidad</class>
+		<class>model.Festivos</class>
+		<class>model.FestivosCCAA</class>
+		<class>model.FestivosNacionales</class>
+		<class>model.TipoFestivo</class>
+                
+		<!-- other properties -->
+		<properties>
+			<property name="openjpa.jdbc.SynchronizeMappings" value="validate"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:mysql://127.0.0.1:3306/festivospx"/>
+            <property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="root"/>
+            <property name="openjpa.ConnectionPassword" value=""/>
+            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+
+			<!-- load foreign key information from the database	  -->
+			<!-- workaround OpenJPA issue https://issues.apache.org/jira/browse/OPENJPA-435  -->
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

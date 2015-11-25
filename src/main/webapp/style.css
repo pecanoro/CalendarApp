@@ -1,0 +1,433 @@
+@font-face {
+  font-family: 'WebOswald';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://themes.googleusercontent.com/static/fonts/oswald/v5/bH7276GfdCjMjApa_dkG6T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+body {
+	font: 10px "OpenSansRegular", Arial, Helvetica,sans-serif;
+	background-image: url('images/background.png');
+	color: #666666;
+}
+
+#header img.grayscale:hover {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+}
+
+#header img.grayscale {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+}
+
+#header {
+	max-width: 920px;
+	min-width: 920px;
+	margin: 20px auto;
+	display: block;
+	border: 0px solid;
+	background-color: transparent;
+}
+
+#bottom {
+	max-width: 920px;
+	min-width: 920px;
+	margin: 25px auto;
+	display: block;
+	border: 1px solid #a8a8a8;
+	position:static;
+	background-color: white;
+}
+
+#content {
+	min-width: 920px;
+	max-width: 920px;
+	margin: 10px auto;
+	display: block;
+	border: 1px solid #a8a8a8;
+	position:static;
+	background-image: url('images/noisy.png');
+	background-color: white;
+	background-repeat:repeat-x;
+	background-size:auto 33px;
+}
+
+#others{
+	float: right;
+	display: inline-block;
+	margin-top: 48px;
+}
+
+#function {
+	display: inline-block;
+	height: 35px;
+	vertical-align: top;
+	margin-top: 20px;
+	padding-top: 15px;
+	border-left: 1px solid #4791ce;
+}
+
+#panel1{
+	width: 30%;
+	height: 110px;
+	display: inline-block;
+	padding: 15px;
+	border-right: solid 1px #a8a8a8 !important;
+	background-image: url('images/noisy.png');
+	-moz-border-top-left-radius: 7px  !important;
+	-webkit-border-top-left-radius: 7px !important;
+	border-top-left-radius: 7px !important;
+	-moz-border-bottom-left-radius: 7px  !important;
+	-webkit-border-bottom-left-radius: 7px !important;
+	border-bottom-left-radius: 7px !important;
+}
+#panel2{
+	width: 35%;
+	height: 110px;
+	display: inline-block;
+	padding: 15px;
+	float:right;
+	border-right: solid 1px #a8a8a8 !important;
+}
+#panel3{
+	width: 25%;
+	height: 110px;
+	display: inline-block;
+	padding: 15px;
+	float:right;
+}
+
+#panel2 .ui-inputfield{
+	border: solid 1px #a8a8a8 !important;
+	box-shadow: none;
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+}
+
+#panel1 .ui-widget-content {
+	color: #dddddd !important;
+}
+
+.dialog .ui-widget-content {
+	background-color: white;
+}
+
+.disclaimer {
+	display: block;
+	padding-left: 15px;
+	margin-bottom: 7px;
+
+}
+
+.title{
+	border-left: 3px solid #4791ce;
+	font-weight: 400;
+	line-height: normal;
+	font-family: 'WebOswald', sans-serif, arial;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	padding-left: 5px;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.title_i{
+	border-left: 3px solid #4791ce;
+	font-weight: 400;
+	line-height: normal;
+	font-family: 'WebOswald', sans-serif, arial;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.apptitle{
+	font-weight: 400;
+	line-height: normal;
+	font-family: 'WebOswald', sans-serif, arial;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	padding-left: 10px;
+	padding-right: 5px;
+}
+
+.title2{
+	display: inline-block;
+}
+
+.instr {
+	float: right;
+	margin-bottom:10px;
+	margin-top:20px;
+	margin-right: 30px;
+	width: 32%;
+}
+
+.step {
+	display: block;
+	color: #4791ce;
+}
+
+.calendar {
+	margin-bottom:10px;
+	text-align: center;
+	border: 0px solid;
+	font-size: 1.1em !important;
+}
+
+.cal {
+	display: inline-block;
+	font-size: 1.1em !important;
+	border: 0px solid !important;
+}
+
+.select_days {
+	margin-top:5px;
+	margin-bottom:10px;
+	margin-left:50px;
+	margin-right:50px;
+	text-align: center;
+	padding-top: 5px !important;
+	
+}
+
+.select_days2 {
+	margin-top:15px;
+	margin-left:50px;
+	margin-right:50px;
+	text-align: center;
+	padding-top: 15px !important;
+	border-top: 1px solid #bbbbbb !important;
+}
+
+.legend {
+	margin-bottom:20px;
+	margin-left:50px;
+	margin-right:50px;
+	text-align: center;
+	padding-top: 10px !important;
+}
+
+.select_days .ui-panel-content{
+	text-align: center !important;
+}
+
+.select {
+	width: 250px !important; 
+}
+
+.select_type {
+	width: 85px !important;
+	text-align: left;
+	margin-right:25px;
+	position: relative;
+	vertical-align: middle;
+}
+
+.select_cities {
+	width: 30%;
+	margin: 20px 30px 60px 20px;
+	display: inline-block;
+}
+
+.options {
+	margin-bottom:10px;
+}
+
+.select_options {
+	width: 20%;
+	display: inline-block;
+	margin: 20px 10px 20px 40px;
+	float: left;
+}
+
+.instrucciones {
+	text-align: justify;
+}
+
+.button{
+	margin-top: 12px;
+	float:right;
+}
+
+.panel_calendar div{
+	font-size: 12px !important;
+}
+
+.weekend { 
+	background: #f0f0f0 !important;
+}
+
+.diaFiestaNacional { 
+	background: #9ed5f7 !important;
+}
+
+.diaFiestaAutonomica { 
+	background: #bae5ff !important;
+}
+
+.diaFiestaLocal { 
+	background: #ddf0ff  !important;
+}
+
+/* ----------------------------- */
+
+.ui-panel{
+	padding: 0px;
+}
+
+.ui-panel-content{
+	padding: 0px !important;
+	-moz-border-radius: 7px  !important;
+	-webkit-border-radius: 7px !important;
+	border-radius: 7px !important;
+}
+
+.ui-widget-content{
+	border: 0px solid #a8a8a8;
+	background: none;
+}
+
+.ui-helper-hidden {
+	background: white;
+}
+
+#content {
+	-moz-border-radius: 7px  !important;
+	-webkit-border-radius: 7px !important;
+	border-radius: 7px !important;
+}
+
+#bottom {
+	-moz-border-radius: 7px  !important;
+	-webkit-border-radius: 7px !important;
+	border-radius: 7px !important;
+}
+
+.ui-corner-all {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.calendar  .ui-state-default {
+	font-weight: normal !important;
+}
+
+.calendar .ui-datepicker .ui-datepicker-header {
+	background: none;
+}
+
+.calendar .ui-widget-header {
+	border: none;
+	color: white;
+	text-shadow: none;
+	font-weight: 400;
+	line-height: normal;
+	font-family: 'WebOswald', sans-serif, arial;
+	text-transform: uppercase;
+}
+
+/* Cambiar a gris*/
+.select_days .input_s .ui-inputfield, .select_days .input_a .ui-inputfield{
+	border: solid 1px #4791ce !important;
+	box-shadow: none;
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+}
+
+.input_s {
+	margin-right: 10px;
+}
+
+/* Azul borrar en caso de gris*/
+.input_s .ui-state-default {
+	border: 1px solid #4791ce !important;
+}
+
+.input_a  .ui-inputfield{
+	width: 170px;
+}
+
+/* Cambiar a gris*/
+.input_a {
+	padding-left: 25px !important;
+	border-left: 1px solid #4791ce !important;
+}
+
+/* Cambiar a gris*/
+.select_days  .ui-selectonemenu{
+	border: 1px solid #4791ce !important;
+}
+
+/* Azul borrar en caso de gris*/
+.select_days .ui-state-default {
+	border-left: 1px solid #4791ce !important;
+}
+
+.select_days .select_type .ui-inputfield{
+	border: none;
+	box-shadow: none;
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+}
+
+.select_days .ui-state-disabled {
+	opacity: .60;
+}
+
+.select_options .ui-widget-header, .select_cities .ui-widget-header, .instr .ui-widget-header {
+	border: none;
+	border-left: 3px solid #4791ce;
+	background: none;
+	color: #666666;
+	text-shadow: none;
+	font-weight: 400;
+	line-height: normal;
+	font-family: 'WebOswald', sans-serif, arial;
+	text-transform: uppercase;
+	font-size: 1.4em;
+	padding-left: 5px;
+	box-shadow: none;
+	margin-bottom: 10px;
+	
+}
+
+.select_options .ui-widget-content {
+	padding-left: 15px;
+	margin-top: 5px;
+}
+
+/* Azul borrar en caso de gris*/
+.select_cities .ui-state-default {
+	border-left: 1px solid #4791ce !important;
+}
+
+.select_cities .ui-widget-content {
+	padding-left: 15px !important;
+}
+
+/* Cambiar a gris*/
+.select_cities .ui-selectonemenu{
+	/*border: solid 1px #a8a8a8 !important;*/
+	border: 1px solid #4791ce !important;
+	box-shadow: none;
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+}
+
+.select_cities .ui-inputfield{
+	border: none;
+	box-shadow: none;
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+}
+
